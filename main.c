@@ -20,7 +20,6 @@ int main(int argc, char **argv)
 	{
 		if(poll_events(argv, instance, grid) == 1)
 			break;
-		SDL_RenderPresent(instance.renderer);
 	}
 	SDL_DestroyRenderer(instance.renderer);
 	SDL_DestroyWindow(instance.window);
@@ -57,6 +56,8 @@ int poll_events(char **argv, SDL_Instance instance, SDL_Point ***grid)
 					else
 						Angle -= 1;
 					a = Angle * M_PI / 180;
+					SDL_SetRenderDrawColor(instance.renderer, 0, 0, 0, 255);
+					SDL_RenderClear(instance.renderer);
 					grid = AllocateM();
 					grid_row(grid);
 					grid_col(grid);
@@ -80,12 +81,12 @@ void draw(SDL_Instance instance, char **argv, SDL_Point ***grid)
 {
 	int i;
 
-	SDL_RenderClear(instance.renderer);
 	SDL_SetRenderDrawColor(instance.renderer, 255, 255, 255, 255);
 	for (i = 0; i < nrows; i++)
 		SDL_RenderDrawLines(instance.renderer, grid[0][i], nrows);
 	for (i = 0; i < ncols; i++)
 		SDL_RenderDrawLines(instance.renderer, grid[1][i], ncols);
+	SDL_RenderPresent(instance.renderer);
 	free_grid(grid);
 
 }
@@ -140,8 +141,8 @@ void rotate(SDL_Point ***grid, float a)
 			{
 				gx = grid[i][j][k].x - 1050;
 				gy = grid[i][j][k].y - 350;
-				Rx = gx * cos(a) - gy * sin(a) + 1050;
-				Ry = gx * sin(a) + gy * cos(a) + 350;
+				Rx = (gx * cos(a) - gy * sin(a)) + 1050;
+				Ry = (gx * sin(a) + gy * cos(a)) + 350;
 				grid[i][j][k].x = Rx;
 				grid[i][j][k].y = Ry;
 			}
