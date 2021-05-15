@@ -124,15 +124,15 @@ Raise the terrain is an application project which creates an isometric projectio
    * You can also adjust the screen width and height by changing the SCREEN_WIDTH and SCREEN_HEIGHT value  in the header.h file
 
 ---
-## Files of Raise the terrain
+## Content of Raise the terrain project
    
 | File name    | Description |
 ---            | ---  |
-main.c         | c file which contains main function, SDL 2 instance initialization, draw and rotate functions
-makegrid.c     | c file which contains function which are used to allocate a memory, to calculate x and y coordinates and to convert x,y values into isometric projection
-get_altitudes.c| c files used to get the altitude of the grid from the user
-free_mem.c     | c files used to free the memory allocated for the grid
-header.h       | h file which containes functions declarations and global variables
+main.c         | a c file which contains main function, SDL 2 instance initialization, draw and rotate functions
+makegrid.c     | a c file which contains function which are used to allocate a memory, to calculate x and y coordinates and to convert x,y values into isometric projection
+get_altitudes.c| a c file which is used to get the altitude of the grid from the user
+free_mem.c     | a c file which is used to free the memory allocated for the grid
+header.h       | an h file which contains functions declarations and global variables
 
 ---
 
