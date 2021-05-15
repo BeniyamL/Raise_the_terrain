@@ -52,9 +52,15 @@ int poll_events(char **argv, SDL_Instance instance, SDL_Point ***grid)
 				else if (key.keysym.sym == SDLK_RIGHT || key.keysym.sym == SDLK_LEFT)
 				{
 					if (key.keysym.sym == SDLK_RIGHT)
+					{
 						Angle += 1;
-					else
+						//printf("%d\n", Angle);
+					}
+					else if (key.keysym.sym == SDLK_LEFT)
+					{
 						Angle -= 1;
+						//printf("%d\n", Angle);
+					}
 					a = Angle * M_PI / 180;
 					SDL_SetRenderDrawColor(instance.renderer, 0, 0, 0, 255);
 					SDL_RenderClear(instance.renderer);

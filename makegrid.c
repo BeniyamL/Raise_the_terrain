@@ -61,10 +61,11 @@ void grid_col(SDL_Point ***grid)
 {
         int total_x, total_y, i, j, x, y, x_initial, y_initial;
 
-        /**total_x = space * nrows;
+	/**
+        total_x = space * nrows;
         total_y = space * ncols;
-        x_initial = (SCREEN_WIDTH / 2) - (total_x / 2);
-        y_initial = (SCREEN_HEIGHT / 2) - (total_y / 2);
+        x_initial = (SCREEN_WIDTH  - total_x )/ 2;
+        y_initial = (SCREEN_HEIGHT - total_y )/ 2;
         x = x_initial;
         y = y_initial;
 	**/
@@ -100,8 +101,8 @@ void grid_row(SDL_Point ***grid)
 	/**
 	total_x = space * nrows;
 	total_y = space * ncols;
-	x_initial = (SCREEN_WIDTH / 2) - (total_x / 2);
-	y_initial = (SCREEN_HEIGHT / 2) - (total_y / 2);
+	x_initial = (SCREEN_WIDTH - total_x ) / 2;
+	y_initial = (SCREEN_HEIGHT - total_y) / 2;
 	x = x_initial;
 	y = y_initial;
 	**/
