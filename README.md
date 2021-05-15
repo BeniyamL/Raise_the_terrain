@@ -135,6 +135,20 @@ free_mem.c     / c files used to free the memory allocated for the grid
 header.h       | h file which containes functions declarations and global variables
 
 ---
+---
+## Available commands
+
+| commands | Description |
+---  | --- |
+ls   | used to list all files and directories in the current workind directory
+pwd  | shows the current working directory
+which| locate a command
+cd   | used to change the directory
+exit | used to exit the shel
+env  | used to show the current environment
+---
+
+
 ## Author
 Beniyam Legesse (https://github.com/BeniyamL/)
 
