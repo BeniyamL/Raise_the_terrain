@@ -2,7 +2,7 @@
 
 ## Description
 
-Raise the terrain is an project which create an isometric projection of a grid and rotate it using the right and left arrow key. It is an optional project of holberton school to provide an apportunity for the student to get some additional marks.It id developed using the SDL2 tools and guidlines.
+Raise the terrain is an application project which creates an isometric projection of a grid and rotates the grid using the right and left arrow key. It is an optional project of holberton school to provide an apportunity for the student to get some additional marks.It is developed using the SDL2 tools and guidlines.
 
 ![Isometric projection of a grid](/grid1.png)
 
@@ -18,7 +18,7 @@ Raise the terrain is an project which create an isometric projection of a grid a
     * we are allowed to use all the functions provided by SDL2
 
 ## Task 0: Isometric projection
-   * Draw Isometric projection of a grid by accepting altitude input from user. An example of the altitude can be
+   * Draw Isometric projection of a grid by accepting altitude input from user. An example of the altitude for 8 x 8 grid can be
 
 ---
 
@@ -82,13 +82,15 @@ Raise the terrain is an project which create an isometric projection of a grid a
 ---
 ## How the project works
   
-    * the project will accept the altitude from the user
+    * The project first accepts the terrain file which contains altitude value from the user
     * It initializes the x and y coordinate to make the grid to be centered
     * It calculates the required space considering the dimension of the screen
-    * It draw the the grid using the x,y values and the calculated space
-    * It Converts this picture into isometric projection using the above formula
-    * It Rotates the grid when left or right arrow is pressed
-    * The system quiets when escap key pressed or when quit button clicked
+    * It allocates the required memory for the grid
+    * It calculates all x, y coordinates of the grid
+    * It converts all x,y values into isometric based on the above formula and the altitude value given by the user
+    * Then it uses the calculated x, y and z values to draw a grid using SDL2 tools
+    * It Rotates the grid when left or right arrow key is pressed
+    * The system stops execution when escap key pressed or when quit button clicked
 
 ---
 ## System Usage
@@ -120,6 +122,17 @@ Raise the terrain is an project which create an isometric projection of a grid a
    * The system displays 8 x 8 grid initialy, but you can change the dimentsion by updating nrows and nclos value in header.h file
    * The system automatically calculates the required space between rows and columns
    * You can also adjust the screen width and height by changing the SCREEN_WIDTH and SCREEN_HEIGHT value  in the header.h file
+
+---
+## Files of Raise the terrain
+   
+/ File name  / Description /
+---            / --- /
+main.c         | c file which contains main function, SDL 2 instance initialization, draw and rotate functions
+makegrid.c     | c file which contains function which are used to allocate a memory, to calculate x and y coordinates and to convert x,y values into isometric projection
+get_altitudes.c| c files used to get the altitude of the grid from the user
+free_mem.c     | c files used to free the memory allocated for the grid
+header.h       | h file which containes functions declarations and global variables
 
 ---
 ## Author

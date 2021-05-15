@@ -21,20 +21,19 @@ void free_grid(SDL_Point ***grid)
 /**
  * free_tokens - free the memory assigned for tokens
  * @tokens: the given tokens
- * @token: single dimensinal token
  *
  * Return: Nothing
  **/
 void free_tokens(char **tokens)
 {
-        char **tmp = tokens;
+	char **tmp = tokens;
 
-        if (tokens)
-        {
-                while (*tokens)
-                        free(*tokens++);
-                free(tmp);
-        }
+	if (tokens)
+	{
+		while (*tokens)
+			free(*tokens++);
+		free(tmp);
+	}
 }
 /**
  * free_cols - free allocated memory of columns
@@ -44,12 +43,12 @@ void free_tokens(char **tokens)
  **/
 void free_cols(char ***cols)
 {
-        int i, j;
+	int i, j;
 
-        for(i = 0; i < nrows; i++)
+	for (i = 0; i < nrows; i++)
 	{
-		for(j = 0; j < ncols; j++) 
-                	free(cols[i][j]);
+		for (j = 0; j < ncols; j++)
+			free(cols[i][j]);
 		free(cols[i]);
 	}
 	free(cols);

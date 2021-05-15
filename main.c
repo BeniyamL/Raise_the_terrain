@@ -12,23 +12,26 @@ int main(int argc, char **argv)
 	SDL_Instance instance;
 	SDL_Point ***grid;
 
-	if(init_instance(&instance) != 0)
-		return (1);	
+	if (init_instance(&instance) != 0)
+		return (1);
 	grid = makegrid(argv, grid);
 	draw(instance, argv, grid);
 	while ("C is awesome")
 	{
-		if(poll_events(argv, instance, grid) == 1)
+		if (poll_events(argv, instance, grid) == 1)
 			break;
 	}
-	SDL_DestroyRenderer(instance.renderer);
-	SDL_DestroyWindow(instance.window);
+	SDL_DestroyRenderer(instance.ren);
+	SDL_DestroyWindow(instance.win);
 	SDL_Quit();
 	return (0);
 }
 
 /**
  * poll_events - function to handle events
+ * @argv: array of the argument
+ * @instance: the istance of SDL
+ * @grid: the given grid
  *
  * Return: 0 on suceesss 1 otherwise
  **/
@@ -41,7 +44,7 @@ int poll_events(char **argv, SDL_Instance instance, SDL_Point ***grid)
 
 	while (SDL_PollEvent(&event))
 	{
-		switch(event.type)
+		switch (event.type)
 		{
 			case SDL_QUIT:
 				return (1);
@@ -54,16 +57,14 @@ int poll_events(char **argv, SDL_Instance instance, SDL_Point ***grid)
 					if (key.keysym.sym == SDLK_RIGHT)
 					{
 						Angle += 1;
-						//printf("%d\n", Angle);
 					}
 					else if (key.keysym.sym == SDLK_LEFT)
 					{
 						Angle -= 1;
-						//printf("%d\n", Angle);
 					}
 					a = Angle * M_PI / 180;
-					SDL_SetRenderDrawColor(instance.renderer, 0, 0, 0, 255);
-					SDL_RenderClear(instance.renderer);
+					SDL_SetRenderDrawColor(instance.ren, 0, 0, 0, 255);
+					SDL_RenderClear(instance.ren);
 					grid = AllocateM();
 					grid_row(grid);
 					grid_col(grid);
@@ -78,8 +79,10 @@ int poll_events(char **argv, SDL_Instance instance, SDL_Point ***grid)
 	return (0);
 }
 /**
- * draw_stuff - draw a line
+ * draw - draw a grid
  * @instance: the given instance
+ * @argv: array of the argument
+ * @grid: the given grid
  *
  * Return: nothing
  **/
@@ -87,23 +90,23 @@ void draw(SDL_Instance instance, char **argv, SDL_Point ***grid)
 {
 	int i;
 
-	SDL_SetRenderDrawColor(instance.renderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(instance.ren, 255, 255, 255, 255);
 	for (i = 0; i < nrows; i++)
-		SDL_RenderDrawLines(instance.renderer, grid[0][i], nrows);
+		SDL_RenderDrawLines(instance.ren, grid[0][i], nrows);
 	for (i = 0; i < ncols; i++)
-		SDL_RenderDrawLines(instance.renderer, grid[1][i], ncols);
-	SDL_RenderPresent(instance.renderer);
+		SDL_RenderDrawLines(instance.ren, grid[1][i], ncols);
+	SDL_RenderPresent(instance.ren);
 	free_grid(grid);
 
 }
 /**
  * init_instance - intialize all instance
- * @instance: the given instance
+ * @in: the given instance
  *
  * Return: 0 on success 1 otherwise
  **/
 
-int init_instance(SDL_Instance *instance)
+int init_instance(SDL_Instance *in)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
@@ -111,26 +114,27 @@ int init_instance(SDL_Instance *instance)
 		return (1);
 	}
 
-	instance->window = SDL_CreateWindow("Raise the terrain", 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
-	if (instance->window == NULL)
+	in->win = SDL_CreateWindow("Raise the terrain", 0, 0, SCREEN_WIDTH,
+	SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
+	if (in->win == NULL)
 	{
 		fprintf(stderr, "SDL_CreateWindow Error: %s\n", SDL_GetError());
 		SDL_Quit();
 		return (1);
 	}
 
-	instance->renderer = SDL_CreateRenderer(instance->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (instance->renderer == NULL)
-        {
-                fprintf(stderr, "SDL_CreateRenderer Error: %s\n", SDL_GetError());
-                SDL_Quit();
-                return (1);
-        }
+	in->ren = SDL_CreateRenderer(in->win, -1, SDL_RENDERER_ACCELERATED
+	| SDL_RENDERER_PRESENTVSYNC);
+	if (in->ren == NULL)
+	{
+		fprintf(stderr, "SDL_CreateRenderer Error: %s\n", SDL_GetError());
+		SDL_Quit();
+		return (1);
+	}
 	return (0);
-
 }
 /**
- * Rotate - rotate the grid
+ * rotate - rotate the grid
  * @a: the angle in radian
  * @grid: the given grid
  * Return: nothing

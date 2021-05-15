@@ -5,7 +5,7 @@
 #define SCREEN_HEIGHT 800
 #define nrows 8
 #define ncols 8
-#define space (SCREEN_WIDTH - 360) / nrows
+#define space ((SCREEN_WIDTH - 360) / nrows)
 #define Incline 0.7
 
 #include <stdlib.h>
@@ -18,10 +18,17 @@
 #include <unistd.h>
 #include <math.h>
 
+/**
+ * struct SDL_Instance - structure for sdl instance
+ * @win: window of sdl
+ * @ren: surface to draw
+ *
+ * Decscription: structure to create window and surface of SDL
+**/
 typedef struct SDL_Instance
 {
-	SDL_Window *window;
-	SDL_Renderer *renderer;
+	SDL_Window *win;
+	SDL_Renderer *ren;
 } SDL_Instance;
 
 /** main **/

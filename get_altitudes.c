@@ -8,29 +8,29 @@
  */
 int _atoi(char *s)
 {
-        int j, sign;
-        unsigned int n;
+	int j, sign;
+	unsigned int n;
 
-        j = 0;
-        sign = 1;
-        n = 0;
-        while (s[j] != '\0')
-        {
-                if (s[j] >= '0' && s[j] <= '9')
-                {
-                        n = (n * 10) + (s[j] - '0');
-                }
-                if (n != 0 && !(s[j] >= '0' && s[j] <= '9'))
-                {
-                        break;
-                }
-                if (s[j] == '-')
-                {
-                        sign = sign * -1;
-                }
-                j++;
-        }
-        return (sign * n);
+	j = 0;
+	sign = 1;
+	n = 0;
+	while (s[j] != '\0')
+	{
+		if (s[j] >= '0' && s[j] <= '9')
+		{
+			n = (n * 10) + (s[j] - '0');
+		}
+		if (n != 0 && !(s[j] >= '0' && s[j] <= '9'))
+		{
+			break;
+		}
+		if (s[j] == '-')
+		{
+			sign = sign * -1;
+		}
+		j++;
+	}
+	return (sign * n);
 }
 
 /**
@@ -41,46 +41,46 @@ int _atoi(char *s)
  **/
 char *_strdup(char *str)
 {
-        char *dup;
-        int i = 0;
-        int strlength = 0;
+	char *dup;
+	int i = 0;
+	int strlength = 0;
 
-        if (str == NULL)
-                return (NULL);
-        strlength = _length(str);
-        dup = malloc(sizeof(char) * (strlength + 1));
-        if (dup == NULL)
-        {
-                free(dup);
-                return (NULL);
-        }
-        while (str[i])
-        {
-                dup[i] = str[i];
-                i++;
-        }
-        dup[i] = '\0';
-        return (dup);
+	if (str == NULL)
+		return (NULL);
+	strlength = _length(str);
+	dup = malloc(sizeof(char) * (strlength + 1));
+	if (dup == NULL)
+	{
+		free(dup);
+		return (NULL);
+	}
+	while (str[i])
+	{
+		dup[i] = str[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
 }
 /**
- * str_length - function that finds the length of a string
+ * _length - function that finds the length of a string
  * @str: the given string
  *
  * Return: the length of a string
  **/
 int _length(char *str)
 {
-        int i = 0;
+	int i = 0;
 
-        while (str[i] != '\0')
-                i++;
-        return (i);
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
 /**
  * get_altitude - read altitude from the text file
- * argv: argument of commands
+ * @argv: argument of commands
  *
- * Return : the altitue
+ * Return: the altitue
  **/
 int **get_altitude(char **argv)
 {
@@ -93,19 +93,15 @@ int **get_altitude(char **argv)
 	if (fd == -1)
 	{
 		fprintf(stderr, "Error in opening a file");
-                return (NULL);
+		return (NULL);
 	}
 	read(fd, buf, 1023);
 	close(fd);
-	
-
 	altitude = malloc(sizeof(int *) * nrows);
 	if (altitude == NULL)
 		return (NULL);
-		
 	for (i = 0; i < nrows; i++)
 		altitude[i] = malloc(sizeof(int) * ncols);
-	
 	rows = str_split(buf, "\n");
 	cols = malloc(sizeof(char **) * nrows);
 	for (i = 0; rows[i]; i++)
@@ -124,7 +120,7 @@ int **get_altitude(char **argv)
  * @str: the given string
  * @del: the delimeter
  *
- * Return array of a string
+ * Return: array of a string
  **/
 char **str_split(char *str, char *del)
 {
@@ -152,5 +148,5 @@ char **str_split(char *str, char *del)
 		free(token);
 	if (str2)
 		free(str2);
-	return (tokens);	
+	return (tokens);
 }
